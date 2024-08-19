@@ -5,6 +5,27 @@
 #include "Clock.h"
 
 using namespace std;
+void ShowBar(int length, double percent)
+{
+    std::cout << '\r' << '|';
+    int filledLength = static_cast<int>(percent / 100 * length);
+    for (int i = 0; i < length; i++) {
+    		if (i < filledLength) {
+    			std::cout << '\r';
+    			for(int j = 0; j < i; j++) {
+    				std::cout << '_';
+				}
+    			if (i % 2 == 0) {
+    				std::cout << 'C';
+				} else {
+					std::cout << 'c';
+				}
+			} else {
+				std::cout << '*';
+			}
+    }
+    std::cout << '|' << percent << '%' << std::flush;
+}
 
 int main() {
     Shape th;
@@ -19,42 +40,42 @@ int main() {
 
     int iterations = 50;
 
-    for (int i = 0; i < iterations; ++i) {
+    for (int i = 1; i <= iterations; ++i) {
         Clock timer;
-
-        // Timing for single pointer insert
+        ShowBar(50,(double)i/iterations*100);
+        
         timer.start();
         a.insert(0, th);
         timer.stop();
         singlePointerInsertTime += timer.getMilliseconds();
 
-        // Timing for single pointer remove
+        
         timer.start();
         a.remove(0);
         timer.stop();
         singlePointerRemoveTime += timer.getMilliseconds();
 
-        // Timing for double pointer insert
+        
         timer.start();
         b.insert(0, th);
         timer.stop();
         doublePointerInsertTime += timer.getMilliseconds();
 
-        // Timing for double pointer remove
+       
         timer.start();
         b.remove(0);
         timer.stop();
         doublePointerRemoveTime += timer.getMilliseconds();
     }
 
-    // Calculating average times
+    
     singlePointerInsertTime /= iterations;
     singlePointerRemoveTime /= iterations;
     doublePointerInsertTime /= iterations;
     doublePointerRemoveTime /= iterations;
 
-    // Displaying average results
-    cout << "Average Vector with single pointer insert: " << singlePointerInsertTime << " ms\n";
+    
+    cout << "\nAverage Vector with single pointer insert: " << singlePointerInsertTime << " ms\n";
     cout << "Average Vector with single pointer remove: " << singlePointerRemoveTime << " ms\n";
     cout << "Average Vector with double pointer insert: " << doublePointerInsertTime << " ms\n";
     cout << "Average Vector with double pointer remove: " << doublePointerRemoveTime << " ms\n";
