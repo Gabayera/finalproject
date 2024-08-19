@@ -24,6 +24,7 @@ public:
     void insert(T* vec_index, T* starting_iterator, T* ending_iterator);
     void remove(int index);
     int size() const;
+    
 };
 
 template <typename T>
