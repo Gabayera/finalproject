@@ -10,17 +10,14 @@ private:
     int m_size;
 
 public:
-    Vector(T input_arr[], int size) : m_size(size) {
-        m_elements = new T[m_size];
-        for (int i = 0; i < m_size; ++i) {
-            m_elements[i] = input_arr[i];
+  Vector(unsigned int Size = 0, T init = T())
+        : m_size(Size), m_elements(new T[Size]) 
+    {
+        for (size_t i = 0; i < m_size; ++i) {
+            m_elements[i] = init;
         }
     }
 
-    Vector(int size=0) : m_size(size) {
-        m_elements = new T[m_size];
-
-    }
 
     ~Vector() {
         delete[] m_elements;
